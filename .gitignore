@@ -1,2 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
+.vs/Crawler/v16/.suo
+.vs/Crawler/DesignTimeBuild/.dtbcache.v2
