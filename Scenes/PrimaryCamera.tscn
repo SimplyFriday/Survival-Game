@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://28ikxchgfcrp"]
+
+[ext_resource type="Script" path="res://Scripts/CameraControl.cs" id="1_ox5u0"]
+
+[node name="CameraPivot" type="Node3D"]
+script = ExtResource("1_ox5u0")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 4, 0)
+
+[node name="CameraCollider" type="RayCast3D" parent="."]
+transform = Transform3D(4.02, 0, 0, 0, -4.02, 6.07003e-07, 0, -6.07003e-07, -4.02, 0, 0, 0)
+
+[node name="DesiredPosition" type="Node3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 4, 0)

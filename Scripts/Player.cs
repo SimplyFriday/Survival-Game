@@ -1,67 +1,106 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 public partial class Player : CharacterBody3D
 {
 	[Export]
-	public float Speed { get; set; } = 1.4f;
+	public float Speed { get; set; } = 80f;
 
 	[Export]
-	public float FallAcceleration { get; set; } = 7.5f;
+	public float FallAcceleration { get; set; } = 7.6f;
 
 	[Export]
-	public float JumpSpeed { get; set; } = 7.5f;
+	public float JumpForce { get; set; } = 16f;
 
-	private Vector3 _targetVelocity = Vector3.Zero;
+	private AnimationPlayer _animationPlayer;
+	private Node3D _pivot;
+	private Node3D _cameraPivot;
+	private float _jumpMomentum = 0;
 
+	public override void _Ready()
+	{
+		base._Ready();
+
+		MotionMode = MotionModeEnum.Grounded;
+
+		_animationPlayer = 	GetNode<Node3D>("Character")
+								.GetNode<AnimationPlayer>("AnimationPlayer");
+		
+		_cameraPivot = GetParent().GetNode<Node3D>("CameraPivot");
+
+		_animationPlayer.GetAnimation("Idle").LoopMode = Animation.LoopModeEnum.Linear;
+		_animationPlayer.GetAnimation("Run").LoopMode = Animation.LoopModeEnum.Linear;
+
+		_animationPlayer.Play("Idle");
+	}
 	public override void _PhysicsProcess(double delta)
 	{
-		var direction = Vector3.Zero;
+		var input2d = Input.GetVector("move_right","move_left","move_back","move_forward") * Speed;
 
-		if (Input.IsActionPressed("move_right"))
+		Rotation = new Vector3 (0, _cameraPivot.Rotation.Y, 0);
+		
+		var targetVelocity = Transform.Basis * new Vector3(input2d.X, 0, input2d.Y);
+		// basis seems to normalize the new vector automatically. It's required
+		// for rotation to work, but fucks up gravity
+		targetVelocity.Y = Velocity.Y;
+
+		if (IsOnFloor()) 
 		{
-			direction.X += 1.0f;
+			if (Input.IsActionJustPressed("jump"))
+			{
+				_jumpMomentum = JumpForce;				
+			}
+		} 
+		
+		// Character animation
+		if (input2d != Vector2.Zero)
+		{
+			_animationPlayer.Play("Run");
+		} else 
+		{
+			_animationPlayer.Play("Idle");
 		}
 
-		if (Input.IsActionPressed("move_left"))
+		if (_jumpMomentum > 0)
 		{
-			direction.X -= 1.0f;
+			targetVelocity.Y += _jumpMomentum * (float)delta;
+			_jumpMomentum -= FallAcceleration * FallAcceleration * (float)delta;
 		}
 
-		if (Input.IsActionPressed("move_forward"))
+		if (!IsOnFloor())
 		{
-			direction.Z -= 1.0f;
+			targetVelocity.Y -= FallAcceleration * (float)delta;
 		}
 
-		if (Input.IsActionPressed("move_back"))
-		{
-			direction.Z += 1.0f;
-		}
+		Velocity = targetVelocity;
 
-		if (direction != Vector3.Zero)
-		{
-			direction = direction.Normalized();
-			GetNode<Node3D>("Pivot").LookAt(Position - direction, Vector3.Up);
-		}
-
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
-		{
-			direction.Y -= 1;
-		}
-
-		// Ground velocity
-		_targetVelocity.X = direction.X * Speed;
-		_targetVelocity.Z = direction.Z * Speed;
-		_targetVelocity.Y = direction.Y * JumpSpeed;
-
-		// Vertical velocity
-		if (!IsOnFloor()) // If in the air, fall towards the floor. Literally gravity
-		{
-			_targetVelocity.Y -= FallAcceleration * (float)delta;
-		}
-
-		// Moving the character
-		Velocity = _targetVelocity;
 		MoveAndSlide();
+	}
+
+	private IEnumerable<float> GetJumpLerp(double delta)
+	{
+		var lerpAmt = 0.0f;
+
+		while(lerpAmt < 1)
+		{
+			lerpAmt += (float)delta;
+			var ret = Mathf.CubicInterpolate(	0, 
+												JumpForce,
+												0,
+												0,
+												lerpAmt);
+				
+				//Lerp(0, JumpForce, lerpAmt);
+			yield return ret;
+
+			if (IsOnFloor())
+			{
+				break;
+			}
+		}
 	}
 }

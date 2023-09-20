@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "./modules/mono/build_scripts/build_assemblies.py",
+            "type": "shell",
+            "args": [
+                "--godot-output-dir=./bin"
+            ],
+            "group": "build",
+            "dependsOn": [
+                "godot-glue"
+            ]
+        },
+        {
+            "label": "godot-glue",
+            "command": "D:\\Godot .Net 4\\Godot_v4.1.1-stable_mono_win64.exe",
+            "args": [
+                "--headless",
+                "--generate-mono-glue modules/mono/glue"
+            ],
+            "dependsOn": [
+                //"clean-glue"
+            ]
+        },
+        {
+            "label": "clean-glue",
+            "command": ""
+        }
+    ]
+}

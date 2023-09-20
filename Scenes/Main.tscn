@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://blonxx1iergpk"]
+[gd_scene load_steps=10 format=3 uid="uid://blonxx1iergpk"]
 
 [ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_2fks5"]
 [ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Scenes/Player.tscn" id="1_52wya"]
+[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Scenes/PrimaryCamera.tscn" id="3_iisbn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mxsk"]
 
@@ -14,10 +15,14 @@ albedo_texture = ExtResource("1_2fks5")
 material = SubResource("StandardMaterial3D_0asjs")
 size = Vector3(1.14, 1, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bld1d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cofxp"]
+
 [node name="Main" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -1, 0)
+transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_4mxsk")
@@ -27,15 +32,57 @@ material_override = SubResource("StandardMaterial3D_xbnhn")
 mesh = SubResource("BoxMesh_ue57f")
 skeleton = NodePath("../CollisionShape3D")
 
+[node name="Box" type="StaticBody3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 3.45, 0.446312, 0.5, 5.49234)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_bld1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+mesh = SubResource("BoxMesh_cofxp")
+
+[node name="Box3" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0.446312, 0.25, 3.6502)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box3"]
+shape = SubResource("BoxShape3D_bld1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box3"]
+mesh = SubResource("BoxMesh_cofxp")
+
+[node name="Box4" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 2, 0.446312, 0.25, -4.71899)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box4"]
+shape = SubResource("BoxShape3D_bld1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box4"]
+mesh = SubResource("BoxMesh_cofxp")
+
+[node name="Ramp" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.433013, 1, 0, -0.25, 1.73205, 4.43062, 0.282939, 3.01274)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_bld1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
+mesh = SubResource("BoxMesh_cofxp")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.0295093, -0.726618, 0.686408, 0, 0.686707, 0.726934, -0.999565, -0.0214513, 0.0202642, 18.0602, 18.6237, 2.75196)
+transform = Transform3D(0.0295093, -0.726618, 0.686408, 0, 0.686707, 0.726934, -0.999565, -0.0214513, 0.0202642, 10.861, 6.408, 2.75196)
 
 [node name="Player" parent="." instance=ExtResource("1_52wya")]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -0.49023, 0)
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.00127923, 0.0957384, 0.00377735)
+FallAcceleration = 30.0
+JumpForce = 100.0
 
-[node name="CameraPivot" type="Marker3D" parent="."]
+[node name="CameraPivot" parent="." instance=ExtResource("3_iisbn")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.824101, 0)
+FollowObjectPath = "Player"
 
-[node name="Camera" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.901833, 0.432086, 0, -0.432086, 0.901833, 0.159129, 0.577832, 1.16204)
-projection = 1
-size = 2.0
+[node name="Box2" type="StaticBody3D" parent="."]
+transform = Transform3D(225, 0, 0, 0, 1, 0, 0, 0, 11.9025, 1.46727, 4.92183, 11.9128)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
+shape = SubResource("BoxShape3D_bld1d")
