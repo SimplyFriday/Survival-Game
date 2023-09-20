@@ -1,32 +1,25 @@
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
             "label": "build",
-            "command": "./modules/mono/build_scripts/build_assemblies.py",
+            "command": "dotnet",
             "type": "shell",
             "args": [
-                "--godot-output-dir=./bin"
+                "build"
             ],
             "group": "build",
-            "dependsOn": [
-                "godot-glue"
-            ]
-        },
-        {
-            "label": "godot-glue",
-            "command": "D:\\Godot .Net 4\\Godot_v4.1.1-stable_mono_win64.exe",
-            "args": [
-                "--headless",
-                "--generate-mono-glue modules/mono/glue"
-            ],
-            "dependsOn": [
-                //"clean-glue"
-            ]
-        },
-        {
-            "label": "clean-glue",
-            "command": ""
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
         }
     ]
 }
