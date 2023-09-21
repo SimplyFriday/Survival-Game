@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://blonxx1iergpk"]
+[gd_scene load_steps=13 format=3 uid="uid://blonxx1iergpk"]
 
 [ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_ut7cd"]
 [ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Scenes/Player.tscn" id="2_3n2lu"]
+[ext_resource type="Script" path="res://Scripts/MovingBox.cs" id="2_60jbb"]
 [ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Scenes/PrimaryCamera.tscn" id="3_h2u1v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mxsk"]
@@ -18,6 +19,12 @@ size = Vector3(1.14, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bld1d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cofxp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y4mmo"]
+size = Vector3(2, 0.15, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v4ldf"]
+size = Vector3(2, 0.15, 2)
 
 [node name="Debug" type="Node3D"]
 
@@ -49,6 +56,21 @@ shape = SubResource("BoxShape3D_bld1d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Box3"]
 mesh = SubResource("BoxMesh_cofxp")
+
+[node name="Moving Box" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55779, 10.179, -4.71599)
+motion_mode = 1
+script = ExtResource("2_60jbb")
+Origin = Vector3(-8.058, 0.904, 4.764)
+Destination = Vector3(-1.558, 10.179, -4.716)
+PauseTime = 2.5
+Speed = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Moving Box"]
+shape = SubResource("BoxShape3D_y4mmo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Moving Box"]
+mesh = SubResource("BoxMesh_v4ldf")
 
 [node name="Box4" type="StaticBody3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 20, 0, 0, 0, 2, 0.446312, 0.25, -4.71899)
