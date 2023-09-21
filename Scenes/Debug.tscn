@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://blonxx1iergpk"]
 
-[ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_2fks5"]
-[ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Scenes/Player.tscn" id="1_52wya"]
-[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Scenes/PrimaryCamera.tscn" id="3_iisbn"]
+[ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_ut7cd"]
+[ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Scenes/Player.tscn" id="2_3n2lu"]
+[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Scenes/PrimaryCamera.tscn" id="3_h2u1v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mxsk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbnhn"]
-albedo_texture = ExtResource("1_2fks5")
+albedo_texture = ExtResource("1_ut7cd")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0asjs"]
 
@@ -19,7 +19,7 @@ size = Vector3(1.14, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cofxp"]
 
-[node name="Main" type="Node3D"]
+[node name="Debug" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -0.5, 0)
@@ -71,13 +71,15 @@ mesh = SubResource("BoxMesh_cofxp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.0295093, -0.726618, 0.686408, 0, 0.686707, 0.726934, -0.999565, -0.0214513, 0.0202642, 10.861, 6.408, 2.75196)
+shadow_enabled = true
+directional_shadow_mode = 1
 
-[node name="Player" parent="." instance=ExtResource("1_52wya")]
+[node name="Player" parent="." instance=ExtResource("2_3n2lu")]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.00127923, 0.0957384, 0.00377735)
 FallAcceleration = 30.0
 JumpForce = 100.0
 
-[node name="CameraPivot" parent="." instance=ExtResource("3_iisbn")]
+[node name="CameraPivot" parent="." instance=ExtResource("3_h2u1v")]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.824101, 0)
 FollowObjectPath = "Player"
 
