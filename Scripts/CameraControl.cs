@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 public partial class CameraControl : Node3D
 {
@@ -24,10 +25,17 @@ public partial class CameraControl : Node3D
 
 		_followedNode = GetParent().GetNode<Node3D>(FollowObjectPath);
 		_camera = GetNode<Camera3D>("Camera");
-		_desiredPosition = GetNode<Node3D>("DesiredPosition");
-		_collider = GetNode<RayCast3D>("CameraCollider");
-
+		
+		_desiredPosition = GetNode<Node3D>("DesiredPosition");	
 		_desiredPosition.LookAt(Transform.Origin);
+
+		_collider = GetNode<RayCast3D>("CameraCollider");
+		
+		// Prevent the object being followed from causing collisions
+		if (_followedNode is CollisionObject3D colObj)
+		{
+			_collider.AddException(colObj);
+		}
 	}
 
 	public override void _Process(double delta)
