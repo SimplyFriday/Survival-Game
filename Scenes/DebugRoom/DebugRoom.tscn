@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://blonxx1iergpk"]
+[gd_scene load_steps=14 format=3 uid="uid://blonxx1iergpk"]
 
+[ext_resource type="Script" path="res://Scenes/DebugRoom/DebugRoom.cs" id="1_0pi4u"]
 [ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_ut7cd"]
-[ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Scenes/Player.tscn" id="2_3n2lu"]
-[ext_resource type="Script" path="res://Scripts/MovingBox.cs" id="2_60jbb"]
-[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Scenes/PrimaryCamera.tscn" id="3_h2u1v"]
+[ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Entities/Player/Player.tscn" id="2_3n2lu"]
+[ext_resource type="Script" path="res://Entities/Generic/MovingBox.cs" id="2_60jbb"]
+[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Entities/Camera/PrimaryCamera.tscn" id="3_h2u1v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mxsk"]
 
@@ -27,6 +28,7 @@ size = Vector3(2, 0.15, 2)
 size = Vector3(2, 0.15, 2)
 
 [node name="Debug" type="Node3D"]
+script = ExtResource("1_0pi4u")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -0.5, 0)
