@@ -85,11 +85,7 @@ public partial class CameraControl : Node3D
 		{
 			if (_desiredPosition.Transform.Origin.Y > 2)
 			{
-				_desiredPosition.Transform = new Transform3D(	_desiredPosition.Basis, 
-																new Vector3 (
-																	_desiredPosition.Transform.Origin.X, 
-																	_desiredPosition.Transform.Origin.Y - DistanceStep,
-																	_desiredPosition.Transform.Origin.Z));
+				_desiredPosition.Transform = ShiftCamera(-DistanceStep);
 			}
 		}
 
@@ -97,12 +93,21 @@ public partial class CameraControl : Node3D
 		{
 			if (_desiredPosition.Transform.Origin.Y < 12)
 			{
-				_desiredPosition.Transform = new Transform3D(	_desiredPosition.Basis, 
-																new Vector3 (
-																	_desiredPosition.Transform.Origin.X, 
-																	_desiredPosition.Transform.Origin.Y + DistanceStep,
-																	_desiredPosition.Transform.Origin.Z));
+				_desiredPosition.Transform = ShiftCamera(DistanceStep);
 			}
 		}
+	}
+
+	private Transform3D ShiftCamera(float moveDistance)
+	{
+		var t = new Transform3D(	_desiredPosition.Basis, 
+									new Vector3 (
+										_desiredPosition.Transform.Origin.X, 
+										_desiredPosition.Transform.Origin.Y + moveDistance,
+										_desiredPosition.Transform.Origin.Z));
+
+		_collider.Scale = new Vector3(1,t.Origin.Y,1);
+
+		return t;
 	}
 }
