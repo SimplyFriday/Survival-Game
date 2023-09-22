@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://blonxx1iergpk"]
+[gd_scene load_steps=16 format=3 uid="uid://blonxx1iergpk"]
 
 [ext_resource type="Script" path="res://Scenes/DebugRoom/DebugRoom.cs" id="1_0pi4u"]
 [ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_ut7cd"]
 [ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Entities/Player/Player.tscn" id="2_3n2lu"]
-[ext_resource type="Script" path="res://Entities/Generic/MovingBox.cs" id="2_60jbb"]
 [ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Entities/Camera/PrimaryCamera.tscn" id="3_h2u1v"]
+[ext_resource type="Script" path="res://Entities/Environment/MovingBox.cs" id="3_pdel0"]
+[ext_resource type="PackedScene" uid="uid://bkmtpivkghsu8" path="res://Entities/NPC/NpcBase.tscn" id="6_5jmhc"]
+[ext_resource type="PackedScene" uid="uid://c2vkurhuc0vb7" path="res://Art/VoxelCharacters/f_1.glb" id="7_lxd7w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mxsk"]
 
@@ -62,7 +64,7 @@ mesh = SubResource("BoxMesh_cofxp")
 [node name="Moving Box" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55779, 10.179, -4.71599)
 motion_mode = 1
-script = ExtResource("2_60jbb")
+script = ExtResource("3_pdel0")
 Origin = Vector3(-8.058, 0.904, 4.764)
 Destination = Vector3(-1.558, 10.179, -4.716)
 PauseTime = 2.5
@@ -94,21 +96,22 @@ shape = SubResource("BoxShape3D_bld1d")
 mesh = SubResource("BoxMesh_cofxp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.0295093, -0.726618, 0.686408, 0, 0.686707, 0.726934, -0.999565, -0.0214513, 0.0202642, 10.861, 6.408, 2.75196)
+transform = Transform3D(0.0295093, -0.726618, 0.686408, 0, 0.686707, 0.726934, -0.999565, -0.0214513, 0.0202642, 1379.8, 953.292, 37.1103)
 shadow_enabled = true
 directional_shadow_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_3n2lu")]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.00127923, 0.0957384, 0.00377735)
-FallAcceleration = 30.0
-JumpForce = 100.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89943, 1.19355, -1.47879)
+JumpForce = 28.0
+ModelPath = "res://Art/VoxelCharacters/f_2.glb"
 
 [node name="CameraPivot" parent="." instance=ExtResource("3_h2u1v")]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.824101, 0)
 FollowObjectPath = "Player"
 
-[node name="Box2" type="StaticBody3D" parent="."]
-transform = Transform3D(225, 0, 0, 0, 1, 0, 0, 0, 11.9025, 1.46727, 4.92183, 11.9128)
+[node name="NpcBase" parent="." instance=ExtResource("6_5jmhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8085, 4.0172, -0.407639)
+ModelPath = "res://Art/VoxelCharacters/f_2.glb"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
-shape = SubResource("BoxShape3D_bld1d")
+[node name="f_1" parent="." instance=ExtResource("7_lxd7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69281, 0, -1.22013)

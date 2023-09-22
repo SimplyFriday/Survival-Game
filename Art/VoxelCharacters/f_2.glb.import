@@ -28,5 +28,13 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D/f_22": {
+"decomposition/advanced": true,
+"physics/body_type": 1,
+"physics/shape_type": 2
+}
+}
+}
 gltf/embedded_image_handling=1

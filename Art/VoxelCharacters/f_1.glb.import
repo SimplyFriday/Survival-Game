@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/f_1.glb-e4d1ae68efd539a1c92d24fd222bbd0a.scn"
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="CharacterBody3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -28,5 +28,15 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D/f_12": {
+"physics/body_type": 2,
+"physics/shape_type": 6,
+"primitive/height": 1.4,
+"primitive/position": Vector3(0, 0.7, 0),
+"primitive/radius": 0.25
+}
+}
+}
 gltf/embedded_image_handling=1

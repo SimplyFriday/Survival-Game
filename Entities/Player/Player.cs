@@ -5,19 +5,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-public partial class Player : CharacterBody3D
+public partial class Player : DynamicModelEntity
 {
 	[Export]
-	public float Speed { get; set; } = 80f;
+	public float Speed { get; set; } = 8f;
 
 	[Export]
-	public float FallAcceleration { get; set; } = 7.6f;
+	public float FallAcceleration { get; set; } = (float)ProjectSettings.GetSetting("physics/3d/default_gravity");
 
 	[Export]
 	public float JumpForce { get; set; } = 16f;
 
 	private AnimationPlayer _animationPlayer;
-	private Node3D _pivot;
 	private Node3D _cameraPivot;
 	private float _jumpMomentum = 0;
 
@@ -27,7 +26,7 @@ public partial class Player : CharacterBody3D
 
 		MotionMode = MotionModeEnum.Grounded;
 
-		_animationPlayer = 	GetNode<Node3D>("Character")
+		_animationPlayer = 	GetChild(0)
 								.GetNode<AnimationPlayer>("AnimationPlayer");
 		
 		_cameraPivot = GetParent().GetNode<Node3D>("CameraPivot");
@@ -59,10 +58,10 @@ public partial class Player : CharacterBody3D
 		// Character animation
 		if (input2d != Vector2.Zero)
 		{
-			_animationPlayer.Play("Run");
+			_animationPlayer?.Play("Run");
 		} else 
 		{
-			_animationPlayer.Play("Idle");
+			_animationPlayer?.Play("Idle");
 		}
 
 		if (_jumpMomentum > 0)
