@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsbts7e0ttsjr"]
 
-[ext_resource type="Script" path="res://Entities/DynamicModelEntity/DynamicModelEntity.cs" id="1_4uejd"]
+[ext_resource type="Script" path="res://Components/DynamicModelEntity/DynamicModelEntity.cs" id="1_4uejd"]
 
 [node name="DynamicModelEntity" type="CharacterBody3D"]
 script = ExtResource("1_4uejd")

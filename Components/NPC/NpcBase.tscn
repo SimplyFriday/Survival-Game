@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bkmtpivkghsu8"]
 
-[ext_resource type="Script" path="res://Entities/NPC/NpcBase.cs" id="1_mvr6r"]
+[ext_resource type="Script" path="res://Components/NPC/NpcBase.cs" id="1_mvr6r"]
 
 [node name="NpcBase" type="CharacterBody3D"]
 script = ExtResource("1_mvr6r")

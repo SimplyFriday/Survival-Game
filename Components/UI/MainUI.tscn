@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://by8fvhr0vrfr2"]
+
+[ext_resource type="PackedScene" uid="uid://bc7lor27ion1x" path="res://Entities/UI/HealthManaBars.tscn" id="1_05d05"]
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthManaBars" parent="." instance=ExtResource("1_05d05")]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 1.0
+offset_bottom = 6.0

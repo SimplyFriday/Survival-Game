@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://28ikxchgfcrp"]
+[gd_scene load_steps=3 format=3 uid="uid://28ikxchgfcrp"]
 
-[ext_resource type="Script" path="res://Entities/Camera/CameraControl.cs" id="1_ox5u0"]
+[ext_resource type="Script" path="res://Components/Camera/CameraControl.cs" id="1_ox5u0"]
+[ext_resource type="PackedScene" uid="uid://by8fvhr0vrfr2" path="res://Components/UI/MainUI.tscn" id="2_uvqjd"]
 
 [node name="CameraPivot" type="Node3D"]
 script = ExtResource("1_ox5u0")
@@ -13,3 +14,6 @@ transform = Transform3D(1, 0, 0, 0, -4, 1.50996e-07, 0, -6.03983e-07, -1, 0, 0, 
 
 [node name="DesiredPosition" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 4, 0)
+
+[node name="MainUI" parent="." instance=ExtResource("2_uvqjd")]
+mouse_filter = 2

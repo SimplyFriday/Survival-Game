@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cslc5awaf21ep"]
+
+[ext_resource type="Script" path="res://Components/Player/Player.cs" id="1_2plea"]
+[ext_resource type="PackedScene" uid="uid://c2vkurhuc0vb7" path="res://Art/VoxelCharacters/f_1.glb" id="2_780wh"]
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_2plea")
+
+[node name="visual_placeholder" parent="." instance=ExtResource("2_780wh")]

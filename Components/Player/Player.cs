@@ -1,9 +1,6 @@
 using Godot;
-using System;
+using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
 
 public partial class Player : DynamicModelEntity
 {
@@ -16,19 +13,34 @@ public partial class Player : DynamicModelEntity
 	[Export]
 	public float JumpForce { get; set; } = 16f;
 
+	[Export]
+	public float CurrentHP { get; set; } = 100;
+
+	[Export]
+	public float CurrentMana { get; set; } = 100;
+
+	[Export]
+	public float MaxHP { get; set; } = 100;
+
+	[Export]
+	public float MaxMana { get; set; } = 100;
+
 	private AnimationPlayer _animationPlayer;
 	private Node3D _cameraPivot;
 	private float _jumpMomentum = 0;
 
 	public override void _Ready()
 	{
+		GetNode<Node3D>("visual_placeholder").Free();
+
 		base._Ready();
 
 		MotionMode = MotionModeEnum.Grounded;
 
-		_animationPlayer = 	GetChild(0)
+		_animationPlayer = 	GetChildren()
+								.First(c => IsInstanceValid(c))
 								.GetNode<AnimationPlayer>("AnimationPlayer");
-		
+
 		_cameraPivot = GetParent().GetNode<Node3D>("CameraPivot");
 
 		_animationPlayer.GetAnimation("Idle").LoopMode = Animation.LoopModeEnum.Linear;
@@ -68,9 +80,7 @@ public partial class Player : DynamicModelEntity
 		{
 			targetVelocity.Y += _jumpMomentum * (float)delta;
 			_jumpMomentum -= FallAcceleration * FallAcceleration * (float)delta;
-		}
-
-		if (!IsOnFloor())
+		} else if (!IsOnFloor())
 		{
 			targetVelocity.Y -= FallAcceleration * (float)delta;
 		}

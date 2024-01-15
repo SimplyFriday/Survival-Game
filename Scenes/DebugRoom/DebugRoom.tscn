@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Scenes/DebugRoom/DebugRoom.cs" id="1_0pi4u"]
 [ext_resource type="Texture2D" uid="uid://cmwvi0t4si6xf" path="res://Art/dirt.png" id="1_ut7cd"]
-[ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Entities/Player/Player.tscn" id="2_3n2lu"]
-[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Entities/Camera/PrimaryCamera.tscn" id="3_h2u1v"]
-[ext_resource type="Script" path="res://Entities/Environment/MovingBox.cs" id="3_pdel0"]
-[ext_resource type="PackedScene" uid="uid://bkmtpivkghsu8" path="res://Entities/NPC/NpcBase.tscn" id="6_5jmhc"]
+[ext_resource type="PackedScene" uid="uid://cslc5awaf21ep" path="res://Components/Player/Player.tscn" id="2_3n2lu"]
+[ext_resource type="PackedScene" uid="uid://28ikxchgfcrp" path="res://Components/Camera/PrimaryCamera.tscn" id="3_h2u1v"]
+[ext_resource type="Script" path="res://Components/Environment/MovingBox.cs" id="3_pdel0"]
+[ext_resource type="PackedScene" uid="uid://bkmtpivkghsu8" path="res://Components/NPC/NpcBase.tscn" id="6_5jmhc"]
 [ext_resource type="PackedScene" uid="uid://c2vkurhuc0vb7" path="res://Art/VoxelCharacters/f_1.glb" id="7_lxd7w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4mxsk"]
@@ -101,9 +101,10 @@ shadow_enabled = true
 directional_shadow_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_3n2lu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89943, 1.19355, -1.47879)
-JumpForce = 28.0
-ModelPath = "res://Art/VoxelCharacters/f_2.glb"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.89943, -0.00559396, -1.47879)
+FallAcceleration = 11.0
+JumpForce = 30.0
+ModelPath = "res://Art/VoxelCharacters/f_8.glb"
 
 [node name="CameraPivot" parent="." instance=ExtResource("3_h2u1v")]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.824101, 0)

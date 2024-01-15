@@ -27,6 +27,7 @@ public partial class DynamicModelEntity : CharacterBody3D
 		AddChild(collider);
 	}
 
+	// TODO make this more robust so that it can handle more complex models
 	private MeshInstance3D FindMesh(Node model)
 	{
 		foreach (var child in model.GetChildren())
